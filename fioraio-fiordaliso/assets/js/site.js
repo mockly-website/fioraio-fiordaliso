@@ -14,6 +14,7 @@
         return '<i style="--i:' + letter++ + '">' + c + "</i>";
       }).join("") + "</span>";
     }).join("");
+    ink.classList.add("is-split");
   }
 
   // Intestazione che diventa carta quando la copertina è passata

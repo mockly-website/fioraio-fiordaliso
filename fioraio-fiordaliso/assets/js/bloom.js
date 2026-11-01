@@ -7,7 +7,6 @@
   var count = document.querySelector("[data-petals]");
   var text = document.querySelector(".bloom__text");
   var steps = Array.prototype.slice.call(document.querySelectorAll(".gesture"));
-  var head = stage.querySelector(".head");
   var petals = Array.prototype.slice.call(stage.querySelectorAll(".petal")).map(function (el, i, all) {
     return { el: el, a: +el.dataset.a, s: +el.dataset.s, at: order(i, all.length) / all.length };
   });
@@ -43,7 +42,6 @@
   window.fiordalisoBloom = draw;
   if (reduce) return;
 
-  head.style.willChange = "transform";
   function scrolly() {
     var want = !root.classList.contains("book-on");
     root.classList.toggle("scrolly", want);

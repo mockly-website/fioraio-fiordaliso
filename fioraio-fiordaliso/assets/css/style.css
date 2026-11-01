@@ -102,7 +102,7 @@ button { background: none; border: 0; cursor: pointer; touch-action: manipulatio
 .menu__close { position: absolute; top: 8px; right: 8px; width: 48px; height: 48px; display: grid; place-items: center; }
 .menu__close:active { transform: scale(.9); }
 .menu__tag { font: 400 1.2rem/1.3 var(--script); color: var(--season); margin-bottom: 8px; }
-.menu__list a { display: flex; align-items: center; min-height: 60px; font: 400 1.7rem/1.1 var(--script); text-decoration: none; border-bottom: 1px solid var(--line); }
+.menu__list a { display: flex; align-items: center; min-height: 60px; font: 400 1.5rem/1.1 var(--script); white-space: nowrap; text-decoration: none; border-bottom: 1px solid var(--line); }
 .menu__list a:active { color: var(--season); }
 .menu__foot { margin-top: auto; padding-top: 24px; font-size: 1rem; color: var(--ink-soft); }
 
@@ -129,6 +129,9 @@ button { background: none; border: 0; cursor: pointer; touch-action: manipulatio
 .ink { display: block; }
 .ink__line { display: block; white-space: nowrap; }
 .ink i { font-style: normal; display: inline-block; white-space: pre; }
+html.js .ink { opacity: 0; animation: show 0s 1.4s forwards; }
+html.js .ink.is-split { opacity: 1; animation: none; }
+@keyframes show { to { opacity: 1; } }
 html.js .ink i { opacity: 0; transform: translateY(.14em) rotate(-3deg); animation: ink .5s var(--ease) forwards; animation-delay: calc(120ms + var(--i) * 34ms); }
 @keyframes ink { to { opacity: 1; transform: none; } }
 html.js .cover__img { animation: settle 1.8s var(--ease) both; }
@@ -253,7 +256,7 @@ html.scrolly .gesture.is-on { opacity: 1; transform: none; }
 .finale__card { position: relative; width: 100%; padding: 90px var(--gutter) 36px; }
 .finale h2 { font-size: clamp(2.6rem, 12vw, 3.5rem); text-shadow: 0 2px 16px rgba(5, 12, 8, .8); }
 .note { margin-top: 22px; padding: 14px; background: #F8F2E6 url("../img/carta.webp"); color: var(--ink); transform: rotate(-1deg); box-shadow: 0 14px 30px rgba(5, 12, 8, .5); }
-.note textarea { display: block; width: 100%; padding: 6px; border: 0; border-bottom: 1px solid var(--line); background: repeating-linear-gradient(transparent 0 37px, var(--line) 37px 38px); font: 400 1.25rem/38px var(--script); resize: none; }
+.note textarea { display: block; width: 100%; height: 152px; padding: 0 6px; border: 0; background: repeating-linear-gradient(transparent 0 37px, var(--line) 37px 38px); font: 400 1.25rem/38px var(--script); resize: none; }
 .note textarea::placeholder { color: var(--ink-soft); opacity: 1; }
 .note textarea:focus-visible { outline-offset: 0; }
 .note .btn { width: 100%; margin-top: 12px; }
@@ -382,11 +385,10 @@ html.scrolly .gesture.is-on { opacity: 1; transform: none; }
 /* Riduci movimento */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
-  html.js .ink i { opacity: 1; transform: none; }
+  html.js .ink, html.js .ink i { opacity: 1; transform: none; }
 }
 
 /* Immagine che non si carica */
-.img-missing { display: grid; place-items: center; }
 img.is-broken { opacity: 0; }
 
 @media (min-width: 600px) {
@@ -439,7 +441,6 @@ html.book-on .topbar { color: var(--on-board); }
 html.book-on .topbar::before { opacity: 0; }
 html.book-on .topbar .topnav__cta { background: var(--paper); color: var(--ink); }
 html.book-on [data-book] { position: relative; }
-html.book-on [data-book] .book-spacer { display: block; }
 html.book-on .book-stage { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; justify-content: center; padding-top: 58px; overflow: hidden; perspective: 2400px; perspective-origin: 50% 44%; }
 html.book-on .book { position: relative; width: min(94vw, calc((100vh - 96px) * 1.42)); height: calc(100vh - 96px); max-height: 1100px; box-shadow: 0 24px 60px rgba(4, 10, 6, .55); }
 html.book-on .book::after { content: ""; position: absolute; z-index: 9; left: 50%; top: 0; bottom: 0; width: 70px; margin-left: -35px; pointer-events: none; background: linear-gradient(to right, transparent, rgba(30, 40, 30, .14) 46%, rgba(10, 16, 12, .32) 50%, rgba(30, 40, 30, .14) 54%, transparent); }

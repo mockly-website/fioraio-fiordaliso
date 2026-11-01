@@ -5,8 +5,7 @@
   if (!main) return;
   var wide = matchMedia("(min-width: 1024px) and (min-height: 640px) and (prefers-reduced-motion: no-preference)");
   var flipNav = document.querySelector(".flip");
-  var pages = [], pairs = [], spacer, stageEl, bookEl, marks = [], active = false, target = 0, shown = 0, raf = 0;
-  var slots = [], homes = [];
+  var pages = [], pairs = [], homes = [], stageEl, bookEl, marks = [], active = false, target = 0, shown = 0, raf = 0;
 
   function build() {
     pages = Array.prototype.slice.call(main.querySelectorAll("[data-page]"));
@@ -82,13 +81,9 @@
   }
   function fromHash() {
     if (!active || !location.hash) return;
-    var el = null;
-    try { el = document.querySelector(location.hash); } catch (e) {}
-    if (!el) return;
     var map = { "#fioritura": 1, "#stagione": 2, "#occasioni": 3, "#banco": 4, "#biglietto": 5 };
-    if (location.hash in map) { goTo(map[location.hash]); return; }
+    if (location.hash in map) goTo(map[location.hash]);
   }
-  // gli id restano sulle sezioni: display:contents li lascia nel DOM
   function apply() {
     var on = wide.matches;
     if (on === active) return;
